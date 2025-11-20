@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
     return jsonify({
         'message': 'CI/CD Demo API',
-        'version': '1.0.0',
+        'version': '2.0.0',
         'timestamp': str(datetime.now())
     })
 
