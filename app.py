@@ -4,7 +4,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 @app.route('/')
-def home():
+def home()
     return jsonify({
         'message': 'CI/CD Demo API',
         'version': '1.0.0',
