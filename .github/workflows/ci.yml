@@ -81,3 +81,22 @@ jobs:
           IMAGE_NAME=ghcr.io/${{ github.repository }}
           docker push $IMAGE_NAME:${{ github.sha }}
           docker push $IMAGE_NAME:latest
+
+    deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: http://localhost:5000
+    steps:
+      - name: Deploy application
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository }}:${{ github.sha }}
+          echo "🚀 Deploying $IMAGE_NAME"
+          echo "SIMULATED: docker pull $IMAGE_NAME"
+          echo "SIMULATED: docker stop cicd-demo || true"
+          echo "SIMULATED: docker rm cicd-demo || true"
+          echo "SIMULATED: docker run -d --name cicd-demo -p 5000:5000 $IMAGE_NAME"
+          echo "SIMULATED: Health check..."
+          echo "✅ Deploy successful"
