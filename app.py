@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
     return jsonify({
         'message': 'CI/CD Demo API',
-        'version': '2.0.0',
+        'version': '2.0.0',  # Uuendatud versioon 2.0.0
         'timestamp': str(datetime.now())
     })
 
@@ -19,11 +19,23 @@ def health():
 def products():
     return jsonify([
         {'id': 1, 'name': 'Laptop', 'price': 999},
-        {'id': 2, 'name': 'Phone', 'price': 599}
+        {'id': 2, 'name': 'Phone', 'price': 599}  # Parandatud hind (positiivne)
     ])
 
 @app.route('/api/version')
 def version():
+    return jsonify({'version': '2.0.0', 'build': 'stable'})
+
+@app.route('/api/status')
+def status():
+    return jsonify({
+        'api': 'running',
+        'version': '2.0.0',
+        'endpoints': ['/', '/health', '/products', '/api/version', '/api/status']
+    })
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
     return jsonify({'version': '2.0.0', 'build': 'stable'})
 
 if __name__ == '__main__':
