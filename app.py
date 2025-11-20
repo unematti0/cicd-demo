@@ -22,5 +22,9 @@ def products():
         {'id': 2, 'name': 'Phone', 'price': 599}
     ])
 
+@app.route('/api/version')
+def version():
+    return jsonify({'version': '2.0.0', 'build': 'stable'})
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
