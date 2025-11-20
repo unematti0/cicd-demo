@@ -24,6 +24,12 @@ def test_products(client):
     assert response.status_code == 200
     products = response.get_json()
     assert len(products) == 2
+
+def test_version_endpoint(client):
+    response = client.get('/api/version')
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['version'] == '2.0.0'
     
     # Kontrolli et kõik hinnad on positiivsed
     for product in products:
