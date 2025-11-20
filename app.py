@@ -19,7 +19,7 @@ def health():
 def products():
     return jsonify([
         {'id': 1, 'name': 'Laptop', 'price': 999},
-        {'id': 2, 'name': 'Phone', 'price': -599}
+        {'id': 2, 'name': 'Phone', 'price': 599}
     ])
 
 if __name__ == '__main__':
