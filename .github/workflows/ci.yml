@@ -20,6 +20,8 @@ jobs:
       - name: Validate Python syntax
         run: |
           python -m py_compile app.py
+          python -m py_compile test_app.py
+          echo "✅ Süntaks on korrektne"
 
   test:
     needs: validate
@@ -38,6 +40,7 @@ jobs:
       
       - name: Run tests
         run: pytest test_app.py -v
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -82,7 +85,7 @@ jobs:
           docker push $IMAGE_NAME:${{ github.sha }}
           docker push $IMAGE_NAME:latest
 
-    deploy:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -96,6 +99,10 @@ jobs:
           echo "🚀 Deploying $IMAGE_NAME"
           echo "SIMULATED: docker pull $IMAGE_NAME"
           echo "SIMULATED: docker stop cicd-demo || true"
+          echo "SIMULATED: docker rm cicd-demo || true"
+          echo "SIMULATED: docker run -d --name cicd-demo -p 5000:5000 $IMAGE_NAME"
+          echo "SIMULATED: Health check..."
+          echo "✅ Deploy successful"
           echo "SIMULATED: docker rm cicd-demo || true"
           echo "SIMULATED: docker run -d --name cicd-demo -p 5000:5000 $IMAGE_NAME"
           echo "SIMULATED: Health check..."
