@@ -16,7 +16,7 @@ def test_home(client):
     response = client.get('/')
     assert response.status_code == 200
     data = response.get_json()
-    assert data['version'] == '1.0.0'
+    assert data['version'] == '2.0.0'
     assert 'message' in data
 
 def test_products(client):
